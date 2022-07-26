@@ -25,7 +25,7 @@ class Keyboard{
         window.addEventListener("keyup", this.onKeyUp.bind(this), false);
 
     }
-    isKeyPressed(){
+    isKeyPressed(keyCode){
         return this.KeysPressed[keyCode];
     }
     onKeyDown(event){

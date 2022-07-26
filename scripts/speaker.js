@@ -33,7 +33,6 @@ class Speaker{
             this.oscillator.stop();
             this.oscillator.disconnect();
             this.oscillator = null;
-
         }
     }
 }
