@@ -23,7 +23,7 @@ class Speaker{
 
             this.oscillator.type = 'square'
 
-            this.oscillator.connct(this.gain);
+            this.oscillator.connect(this.gain);
             this.oscillator.start();
         }
     }
