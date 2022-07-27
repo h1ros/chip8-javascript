@@ -1,4 +1,4 @@
-import Renderer from './rederer.js';
+import Renderer from './renderer.js';
 import Keyboard from './keyboard.js';
 import Speaker from './speaker.js';
 import CPU from './cpu.js';
@@ -16,7 +16,7 @@ function init() {
     startTime = then;
 
     cpu.loadSpritesIntoMemory();
-    cpu.loadRom('../roms/programs/Keypad Test [Hap, 2006].ch8');
+    cpu.loadRom('../roms/programs/Delay Timer Test [Matthew Mikolay, 2010].ch8');
     loop = requestAnimationFrame(step);
 }
 
