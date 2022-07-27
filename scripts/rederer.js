@@ -24,9 +24,7 @@ class Renderer {
         } else if (y < 0) {
             y += this.rows;
         }
-
         let pixelLoc = x + (y * this.cols);
-
         this.display[pixelLoc] ^= 1;
         return !this.display[pixelLoc];
     }

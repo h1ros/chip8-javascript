@@ -1,6 +1,6 @@
 class CPU {
     constructor(renderer, keyboard, speaker){
-        this.rederer = renderer;
+        this.renderer = renderer;
         this.keyboard = keyboard;
         this.speaker = speaker;
 
@@ -69,7 +69,7 @@ class CPU {
             if (request.response) {
                 let program = new Uint8Array(request.response);
 
-                sefl.loadProgramIntoMemory(program);
+                self.loadProgramIntoMemory(program);
             }
         }
         request.open('GET', 'roms/' + romName);
@@ -82,6 +82,8 @@ class CPU {
     cycle(){
         for (let i = 0; i < this.speed; i++){
             if (!this.paused){
+                console.log("opcode ", this.memory[this.pc].toString(16), this.memory[this.pc+1].toString(16))
+
                 let opcode = (this.memory[this.pc] << 8 | this.memory[this.pc + 1]);
                 this.executeInstruction(opcode);
             }
@@ -90,7 +92,7 @@ class CPU {
             this.updateTimers();
         }
         this.playSound();
-        this.rederer.render();
+        this.renderer.render();
 
     }
     updateTimers(){
@@ -113,12 +115,12 @@ class CPU {
         this.pc += 2;
         let x = (opcode & 0x0F00) >> 8;
         let y = (opcode & 0x00F0) >> 4;
-
+        console.log("x: ", x, "y: ", y)
         switch (opcode & 0xF000) {
             case 0x0000:
                 switch (opcode) {
                     case 0x00E0:
-                        this.rederer.clear();
+                        this.renderer.clear();
                         break;
                     case 0x00EE:
                         this.pc = this.stack.pop();
@@ -219,8 +221,7 @@ class CPU {
                 this.v[x] = rand& (opcode & 0xFF);
                 break;
             case 0xD000:
-                N = (opcode & 0xF);
-                this.draw(x, y, N);
+                this.draw(x, y, opcode & 0xF);
                 break;
             case 0xE000:
                 switch (opcode & 0xFF) {
@@ -267,13 +268,13 @@ class CPU {
                         this.memory[this.i + 2] = parseInt(this.v[x] % 10);
                         break;
                     case 0x55:
-                        for (let registerIndex = 0; registerIndex <= x; registerIndex+=){
+                        for (let registerIndex = 0; registerIndex <= x; registerIndex++){
                             this.memory[this.i + registerIndex] = this.v[registerIndex];
                         }
                         break;
                     case 0x65:
-                        for (let registerIndex = 0; registerIndex <= x; registerIndex+=){
-                            this.v[this.i + registerIndex] = this.memory[registerIndex];
+                        for (let registerIndex = 0; registerIndex <= x; registerIndex++){
+                            this.v[registerIndex] = this.memory[this.i + registerIndex];
                         }
                         break;
                 }
@@ -291,18 +292,18 @@ class CPU {
         let width = 8;
 
         this.v[0xF] = 0;
-
+        console.log('draw(Vx, Vy): ', this.v[x], this.v[y])
         for (let row = 0; row < N; row++){
             let sprite = this.memory[this.i + row];
-
+            console.log('draw (', row,'): ', sprite.toString(2).padStart(8, '0').replaceAll('1', '■').replaceAll('0', '□'))
             for (let col = 0; col < width; col ++){
                 if ((sprite & 0x80) > 0){
                     if (this.renderer.setPixel(this.v[x] + col, this.v[y] + row)){
                         this.v[0xF] = 1;
                     }
                 }
+                sprite <<= 1;
             }
-            sprite <<= 1;
         }
     }
 }
