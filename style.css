@@ -1,3 +1,19 @@
 canvas {
     border: 2px solid black;
+    width: 600px;
+    height: 300px;
 }
+
+main {
+    /* max-width: 800px; */
+    margin: 0 auto;
+    text-align: center;
+}
+
+section {
+    display: flex;
+}
+
+section div {
+    margin: 0 15px;
+  }

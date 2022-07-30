@@ -1,5 +1,6 @@
 class CPU {
     constructor(renderer, keyboard, speaker){
+        console.log('CPU is constructed')
         this.renderer = renderer;
         this.keyboard = keyboard;
         this.speaker = speaker;
@@ -25,6 +26,8 @@ class CPU {
 
         this.paused = false;
         this.speed = 10;
+
+        this.renderer.clear()
 
     }
 

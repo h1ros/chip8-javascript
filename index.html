@@ -2,11 +2,34 @@
 <html>
     <head>
         <link rel="stylesheet" href="style.css">
+        <title>Chip8 Emulator</title>
     </head>
     <body>
-        <canvas></canvas>
+        <h1>Welcome to Chip8 Emulator</h1>
+        <main>
+            <section>
+                <div>
+                    <canvas></canvas>
+                </div>
+                <aside>
+                    <div>
+                        <select id="select-rom">
+                            <option disabled selected>Select game:</option>
+                            <option >Tetris [Fran Dachille, 1991]</option>
+                            <option >15 Puzzle [Roger Ivie]</option>
+                            <option >Pong (1 player)</option>
+                        </select>
+                    </div>
+                </aside>
+            </section>
+        </main>
 
-        <script type="module" src="scripts/chip8.js"></script>
-
+        <p>
+            <small>
+                Made by <a href="">h1ros</a> | <a href="https://github.com/h1ros/chip8-javascript">View Source</a>
+            </small>
+        </p>
     </body>
+    <script type="module" src="./index.js"></script>
+    <!-- <script type="module" src="./scripts/chip8.js"></script> -->
 </html>

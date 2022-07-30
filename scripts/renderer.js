@@ -1,5 +1,6 @@
 class Renderer {
     constructor (scale) {
+        console.log('Renderer is constructed')
         this.cols = 64;
         this.rows = 32;
 
