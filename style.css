@@ -1,5 +1,10 @@
+h1 {
+font-family: Courier;
+color: #3C3C3C;
+}
+
 canvas {
-    border: 2px solid black;
+    border: 2px solid rgba(0, 0, 0, 0.212);
     width: 600px;
     height: 300px;
 }
@@ -12,8 +17,134 @@ main {
 
 section {
     display: flex;
+    border-radius: 10px 10px 10px 10px;
 }
 
 section div {
     margin: 0 15px;
+  }
+
+aside > div{
+  display: flex;              /* establish flex container */
+  align-items: center;
+}
+
+/* From uiverse.io by @victoryamaykin */
+.switch {
+    position: relative;
+    display: inline-block;
+    width: 76px;
+    height: 26px;
+    margin: 0 0 5px51px;
+   }
+
+   .switch input {
+    display: none;
+   }
+
+   .slider {
+    position: absolute;
+    cursor: pointer;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: #3C3C3C;
+    -webkit-transition: .4s;
+    transition: .4s;
+    border-radius: 34px;
+   }
+
+   .slider:before {
+    position: absolute;
+    content: "";
+    height: 18px;
+    width: 18px;
+    left: 4px;
+    bottom: 4px;
+    background-color: white;
+    -webkit-transition: .4s;
+    transition: .4s;
+    border-radius: 50%;
+   }
+
+   input:checked + .slider {
+    background-color: #0E6EB8;
+   }
+
+   input:focus + .slider {
+    box-shadow: 0 0 1px #2196F3;
+   }
+
+   input:checked + .slider:before {
+    -webkit-transform: translateX(16px);
+    -ms-transform: translateX(16px);
+    transform: translateX(50px);
+   }
+
+   /*------ ADDED CSS ---------*/
+   .slider:after {
+    content: 'STOP';
+    color: white;
+    display: block;
+    position: absolute;
+    transform: translate(-50%,-50%);
+    top: 50%;
+    left: 50%;
+    font-size: 9px;
+    font-family: Verdana, sans-serif;
+   }
+
+   input:checked + .slider:after {
+    content: 'RUN';
+   }
+
+   /*--------- END --------*/
+
+
+   .theme-blue{
+    --radius: 2em;
+    /* --baseFg: #2952e8; */
+    --baseBg: #827b7b2a;
+    --accentFg: #0E6EB8;
+    --accentBg: #0E6EB8;
+  }
+
+
+
+  select {
+
+    -webkit-appearance: none;
+    appearance: none;
+    color: var(--baseFg);
+    border: 1px solid var(--baseFg);
+    line-height: 1;
+    outline: 0;
+    padding: 0.65em 2.5em 0.55em 0.75em;
+    border-radius: var(--radius);
+    background-color: var(--baseBg);
+    background-image: linear-gradient(var(--baseFg), var(--baseFg)),
+      linear-gradient(-135deg, transparent 50%, var(--accentBg) 50%),
+      linear-gradient(-225deg, transparent 50%, var(--accentBg) 50%),
+      linear-gradient(var(--accentBg) 42%, var(--accentFg) 42%);
+    background-repeat: no-repeat, no-repeat, no-repeat, no-repeat;
+    background-size: 1px 100%, 20px 22px, 20px 22px, 20px 100%;
+    background-position: right 20px center, right bottom, right bottom, right bottom;
+  }
+
+  select:hover {
+    background-image: linear-gradient(var(--accentFg), var(--accentFg)),
+      linear-gradient(-135deg, transparent 50%, var(--accentFg) 50%),
+      linear-gradient(-225deg, transparent 50%, var(--accentFg) 50%),
+      linear-gradient(var(--accentFg) 42%, var(--accentBg) 42%);
+  }
+
+  select:active {
+    background-image: linear-gradient(var(--accentFg), var(--accentFg)),
+      linear-gradient(-135deg, transparent 50%, var(--accentFg) 50%),
+      linear-gradient(-225deg, transparent 50%, var(--accentFg) 50%),
+      linear-gradient(var(--accentFg) 42%, var(--accentBg) 42%);
+    color: var(--accentBg);
+    border-color: var(--accentFg);
+    background-color: var(--accentFg);
   }

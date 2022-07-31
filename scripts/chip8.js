@@ -9,8 +9,6 @@ class CHIP8 {
     }
 
     init(rom_game) {
-        console.log('executing init: this:', this)
-
         const renderer = new Renderer(10);
         const keyboard = new Keyboard();
         const speaker = new Speaker();
@@ -29,9 +27,8 @@ class CHIP8 {
     }
 
     step = () => {
-        console.log('executing step: this:', this)
         this.elapsed = Date.now() - this.then;
-        if (this.elapsed > this.fpsInterval) {
+        if (this.elapsed > this.fpsInterval && !this.cpu.paused) {
                 // Cycle the CPU
                 this.cpu.cycle();
                 this.then = Date.now();
