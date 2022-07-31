@@ -1,9 +1,6 @@
 
 body {
   margin: 10px 10px;
-  /* background: #141414; */
-  /* font-family: 'Press Start 2P', sans-serif; */
-  /* color: #33ff66; */
 }
 
 h1 {
@@ -22,7 +19,6 @@ canvas {
 }
 
 main {
-    /* max-width: 800px; */
     margin: 0 auto;
     text-align: center;
 }
@@ -39,15 +35,18 @@ section div {
 aside > div{
   display: flex;              /* establish flex container */
   align-items: center;
-  width: 420px;
-  /* display: inline-block; */
 }
 
 pre {
   font-size: 14px;
   font-family: 'Courier New', Monospace;
-  white-space: pre;
-  font-weight: 600;
+  font-weight: 500;
+  overflow-x: scroll;
+  /* white-space: pre-wrap; */
+  word-wrap: break-word;
+  height: 190px;
+  width: 560px;
+  border: .1px dotted #3C3C3C;
 }
 
 
@@ -144,7 +143,7 @@ pre.instructions {
     appearance: none;
     color: var(--baseFg);
     border: 1px solid var(--baseFg);
-    line-height: 1;
+    line-height: 1em;
     outline: 0;
     padding: 0.65em 2.5em 0.55em 0.75em;
     border-radius: var(--radius);
