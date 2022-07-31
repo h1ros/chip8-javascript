@@ -1,8 +1,20 @@
+
+body {
+  margin: 10px 10px;
+  /* background: #141414; */
+  /* font-family: 'Press Start 2P', sans-serif; */
+  /* color: #33ff66; */
+}
+
 h1 {
 font-family: Courier;
 color: #3C3C3C;
 }
 
+h2 {
+  font-family: Courier;
+  color: #3C3C3C;
+  }
 canvas {
     border: 2px solid rgba(0, 0, 0, 0.212);
     width: 600px;
@@ -27,6 +39,18 @@ section div {
 aside > div{
   display: flex;              /* establish flex container */
   align-items: center;
+}
+
+pre {
+  font-size: 14px;
+  font-family: 'Courier New', Monospace;
+  white-space: pre;
+  font-weight: 600;
+}
+
+
+pre.instructions {
+  text-align: left;
 }
 
 /* From uiverse.io by @victoryamaykin */
