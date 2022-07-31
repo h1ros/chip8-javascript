@@ -13,7 +13,6 @@ class CHIP8 {
         const keyboard = new Keyboard();
         const speaker = new Speaker();
         const cpu = new CPU(renderer, keyboard, speaker);
-        // let loop;
         let fps = 60
         this.cpu = cpu;
         this.fpsInterval = 1000 / fps;

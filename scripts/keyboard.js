@@ -27,16 +27,13 @@ class Keyboard{
 
     }
     isKeyPressed(keyCode){
-        console.log('isKeyPressed')
         console.log('keyCode: ', keyCode)
         return this.keysPressed[keyCode];
     }
     onKeyDown(event){
-        console.log('onKeyDown')
         let key = this.KEYMAP[event.which];
         console.log('down key: ', key)
         this.keysPressed[key] = true;
-        console.log('this.keysPressed', this.keysPressed)
         if (this.onNextKeyPress !== null && key) {
             this.onNextKeyPress(parseInt(key));
             this.onNextKeyPress = null;

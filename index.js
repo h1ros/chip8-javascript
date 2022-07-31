@@ -4,14 +4,40 @@ window.chip8 = new CHIP8();
 
 function selectRom() {
     let select = document.querySelector('#select-rom option:checked')
-    let rom_type =  select.parentElement.label
-    let rom_name = select.value + '.ch8'
-    console.log('loading rom:', rom_name)
+    let romType =  select.parentElement.label
     console.log('this within selectRom:', this)
-    window.chip8.init('./' + rom_type + '/' + rom_name);
+    window.chip8.init(`./${romType}/${select.value}.ch8`);
     document.querySelector("input[type=checkbox]").disabled = false;
     document.querySelector("input[type=checkbox]").checked = true;
     document.querySelector('select').blur();
+    switchInstuction(`./${romType}/${select.value}.txt`)
+}
+
+function switchInstuction(filePath) {
+  console.log(`filePath:  ${filePath}`)
+  const instructionsDisplay = document.querySelector('.instructions')
+
+
+  var f = new XMLHttpRequest();
+  f.open("GET", `./roms/${filePath}`, true);
+  f.onloadend = function ()
+  {
+      if(f.readyState === 4)
+      {
+          if(f.status === 200 || f.status == 0)
+          {
+              instructionsDisplay.textContent = f.responseText;
+          }
+          else {
+            const instructionsDisplay = document.querySelector('.instructions');
+            instructionsDisplay.textContent = "No instruction";
+          }
+      }
+  }
+  f.onerror = function(){
+
+  };
+  f.send();
 }
 
 function switchCpu(){

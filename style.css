@@ -39,6 +39,8 @@ section div {
 aside > div{
   display: flex;              /* establish flex container */
   align-items: center;
+  width: 420px;
+  /* display: inline-block; */
 }
 
 pre {
