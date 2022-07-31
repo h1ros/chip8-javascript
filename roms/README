@@ -1,0 +1,25 @@
+
+-----------------------------------------------------------------------------
+Title		      :	Chip-8 Program Pack
+Author		    : h1ros
+Genre		      :	Compilation
+System		    :	Chip-8/SuperChip/MegaChip8
+Last updated	:	2022-07-30
+-----------------------------------------------------------------------------
+
+This is a collection of ROMs for CHIP-8 / SuperChip / MegaChip8 programs copied from [Revival Studios' Chip-8 Program Pack List](https://github.com/dmatlack/chip8/blob/master/roms/CHANGELOG) and I organize the strucutre and added some modification.
+
+
+- demo: demo illustration by pixels
+- games: games e.g., PONG, Tic-tac toe, Tetris
+- hires: hardware compatible ROMS 64x64 hi-res (hi-resolusion) mode
+- programs: test programs for graphics, keyboard, instructions etc.
+
+
+Distribution:
+-------------
+This package can be freely distributed in its original form.
+If you have any additions for this pack, let me know.
+
+[h1ros](https://github.com/h1ros/chip8-javascript)
+
