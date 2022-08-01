@@ -1,0 +1,1 @@
+It shows a word "CHIP8"

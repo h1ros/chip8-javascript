@@ -1,0 +1,14 @@
+This is a test suite developed by [Timendus](https://github.com/Timendus/chip8-test-suite).
+
+It consists of the following tests:
+1. IBM logo
+2. Corax89's opcode test (improved version)
+3. Flags test
+4. Quirks test
+5. Keypad test
+
+In the menu, you can press any of the numbers 1 to 5 on the CHIP-8 keypad
+to jump to the corresponding test.
+
+Note that on a PC keyboard the keys Q and W generally map to 4 and 5,
+not the numeric keys.

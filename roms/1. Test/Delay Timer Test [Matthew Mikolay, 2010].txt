@@ -1,9 +1,16 @@
-Hey guys!
+This test allows the user to change the value of the V3 register using the 2 and 8
+keys.
 
-Here's another little program I wrote to test out a feature in my game. This
-program allows the user to change the value of the V3 register using the 2 and 8
-keys. When the 5 key is pressed, the delay timer starts counting down from the
+When the 5 key is pressed, the delay timer starts counting down from the
 value the user placed into the V3 register, and the screen is updated as the
 value changes.
 
--Matt
+To start:     5      start the timer
+              2, 8   change the value
+
+
+Chip-8 Key  ->  On your keyboard
+1 2 3 C         1 2 3 4
+4 5 6 D         Q W E R
+7 8 9 E         A S D F
+A 0 B F         Z X C V
