@@ -6,6 +6,7 @@ function selectRom() {
     let select = document.querySelector('#select-rom option:checked')
     let romType =  select.parentElement.label
     console.log('this within selectRom:', this)
+    window.chip8 = new CHIP8();
     window.chip8.init(`./${romType}/${select.value}.ch8`);
     document.querySelector("input[type=checkbox]").disabled = false;
     document.querySelector("input[type=checkbox]").checked = true;

@@ -9,10 +9,10 @@ class CHIP8 {
     }
 
     init(rom_game) {
-        const renderer = new Renderer(10);
-        const keyboard = new Keyboard();
-        const speaker = new Speaker();
-        const cpu = new CPU(renderer, keyboard, speaker);
+        let renderer = new Renderer(10);
+        let keyboard = new Keyboard();
+        let speaker = new Speaker();
+        let cpu = new CPU(renderer, keyboard, speaker);
         let fps = 60
         this.cpu = cpu;
         this.fpsInterval = 1000 / fps;
@@ -23,6 +23,7 @@ class CHIP8 {
         this.cpu.loadRom(rom_game);
         this.rom_game = rom_game
         this.loop = requestAnimationFrame(this.step);
+        console.log('CHIP8 is initialized')
     }
 
     step = () => {
