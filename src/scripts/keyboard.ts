@@ -39,7 +39,7 @@ class Keyboard{
         console.log('down key: ', key)
         this.keysPressed[key] = true;
         if (this.onNextKeyPress !== null && key) {
-            this.onNextKeyPress(parseInt());
+            this.onNextKeyPress(key);
             this.onNextKeyPress = null;
         }
     }

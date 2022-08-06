@@ -288,9 +288,9 @@ class CPU {
                         this.i = this.v[x] * 5;
                         break;
                     case 0x33:
-                        this.memory[this.i] = parseInt(this.v[x] / 100);
-                        this.memory[this.i + 1] = parseInt(this.v[x] % 100) / 10;
-                        this.memory[this.i + 2] = parseInt(this.v[x] % 10);
+                        this.memory[this.i] = Math.floor(this.v[x] / 100);
+                        this.memory[this.i + 1] =  Math.floor(this.v[x] % 100) / 10;
+                        this.memory[this.i + 2] =  Math.floor(this.v[x] % 10);
                         break;
                     case 0x55:
                         for (let registerIndex = 0; registerIndex <= x; registerIndex++){

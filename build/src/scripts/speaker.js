@@ -1,8 +1,8 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
-var Speaker = /** @class */ (function () {
-    function Speaker() {
-        var AudioContext = window.AudioContext || window.webkitAudioContext;
+class Speaker {
+    constructor() {
+        const AudioContext = window.AudioContext || window.webkitAudioContext;
         this.audioCtx = new AudioContext();
         this.gain = this.audioCtx.createGain();
         this.finish = this.audioCtx.destination;
@@ -12,7 +12,7 @@ var Speaker = /** @class */ (function () {
         // // Unmute the audio
         // this.gain.setValueAtTime(1, this.audioCtx.currentTime);
     }
-    Speaker.prototype.play = function (frequency) {
+    play(frequency) {
         if (this.audioCtx && !this.oscillator) {
             this.oscillator = this.audioCtx.createOscillator();
             this.oscillator.frequency.setValueAtTime(frequency || 440, this.audioCtx.currentTime);
@@ -20,14 +20,14 @@ var Speaker = /** @class */ (function () {
             this.oscillator.connect(this.gain);
             this.oscillator.start();
         }
-    };
-    Speaker.prototype.stop = function () {
+    }
+    stop() {
         if (this.oscillator) {
             this.oscillator.stop();
             this.oscillator.disconnect();
             this.oscillator = null;
         }
-    };
-    return Speaker;
-}());
+    }
+}
 exports.default = Speaker;
+//# sourceMappingURL=speaker.js.map

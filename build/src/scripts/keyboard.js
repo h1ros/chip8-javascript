@@ -1,7 +1,7 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
-var Keyboard = /** @class */ (function () {
-    function Keyboard() {
+class Keyboard {
+    constructor() {
         console.log('Keyboard is constructed');
         this.KEYMAP = {
             49: 0x1,
@@ -26,25 +26,25 @@ var Keyboard = /** @class */ (function () {
         window.addEventListener("keydown", this.onKeyDown.bind(this), false);
         window.addEventListener("keyup", this.onKeyUp.bind(this), false);
     }
-    Keyboard.prototype.isKeyPressed = function (keyCode) {
+    isKeyPressed(keyCode) {
         console.log('keyCode: ', keyCode);
         return this.keysPressed[keyCode];
-    };
-    Keyboard.prototype.onKeyDown = function (event) {
-        var key = this.KEYMAP[event.which];
+    }
+    onKeyDown(event) {
+        let key = this.KEYMAP[event.which];
         console.log('down key: ', key);
         this.keysPressed[key] = true;
         if (this.onNextKeyPress !== null && key) {
-            this.onNextKeyPress(parseInt());
+            this.onNextKeyPress(key);
             this.onNextKeyPress = null;
         }
-    };
-    Keyboard.prototype.onKeyUp = function (event) {
+    }
+    onKeyUp(event) {
         console.log('onKeyUp event', event);
-        var key = this.KEYMAP[event.which];
+        let key = this.KEYMAP[event.which];
         console.log('up key: ', key);
         this.keysPressed[key] = false;
-    };
-    return Keyboard;
-}());
+    }
+}
 exports.default = Keyboard;
+//# sourceMappingURL=keyboard.js.map

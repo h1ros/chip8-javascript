@@ -1,7 +1,7 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
-var CPU = /** @class */ (function () {
-    function CPU(renderer, keyboard, speaker) {
+class CPU {
+    constructor(renderer, keyboard, speaker) {
         console.log('CPU is constructed');
         this.renderer = renderer;
         this.keyboard = keyboard;
@@ -23,8 +23,8 @@ var CPU = /** @class */ (function () {
         this.speed = 10;
         this.renderer.clear();
     }
-    CPU.prototype.loadSpritesIntoMemory = function () {
-        var sprites = [
+    loadSpritesIntoMemory() {
+        const sprites = [
             0xF0, 0x90, 0x90, 0x90, 0xF0,
             0x20, 0x60, 0x20, 0x20, 0x70,
             0xF0, 0x10, 0xF0, 0x80, 0xF0,
@@ -42,34 +42,34 @@ var CPU = /** @class */ (function () {
             0xF0, 0x80, 0xF0, 0x80, 0xF0,
             0xF0, 0x80, 0xF0, 0x80, 0x80 // F
         ];
-        for (var i = 0; i < sprites.length; i++) {
+        for (let i = 0; i < sprites.length; i++) {
             this.memory[i] = sprites[i];
         }
-    };
-    CPU.prototype.loadProgramIntoMemory = function (program) {
-        for (var loc = 0; loc < program.length; loc++) {
+    }
+    loadProgramIntoMemory(program) {
+        for (let loc = 0; loc < program.length; loc++) {
             this.memory[0x200 + loc] = program[loc];
         }
-    };
-    CPU.prototype.loadRom = function (romName) {
+    }
+    loadRom(romName) {
         var request = new XMLHttpRequest();
         var self = this;
         request;
         request.onload = function () {
             if (request.response) {
-                var program = new Uint8Array(request.response);
+                let program = new Uint8Array(request.response);
                 self.loadProgramIntoMemory(program);
             }
         };
         request.open('GET', 'roms/' + romName);
         request.responseType = 'arraybuffer';
         request.send();
-    };
-    CPU.prototype.cycle = function () {
-        for (var i = 0; i < this.speed; i++) {
+    }
+    cycle() {
+        for (let i = 0; i < this.speed; i++) {
             if (!this.paused) {
                 console.log("opcode ", this.memory[this.pc].toString(16), this.memory[this.pc + 1].toString(16));
-                var opcode = (this.memory[this.pc] << 8 | this.memory[this.pc + 1]);
+                let opcode = (this.memory[this.pc] << 8 | this.memory[this.pc + 1]);
                 this.executeInstruction(opcode);
             }
         }
@@ -78,27 +78,27 @@ var CPU = /** @class */ (function () {
         }
         this.playSound();
         this.renderer.render();
-    };
-    CPU.prototype.updateTimers = function () {
+    }
+    updateTimers() {
         if (this.delayTimer > 0) {
             this.delayTimer -= 1;
         }
         if (this.soundTimer > 0) {
             this.soundTimer -= 1;
         }
-    };
-    CPU.prototype.playSound = function () {
+    }
+    playSound() {
         if (this.soundTimer > 0) {
             this.speaker.play(440);
         }
         else {
             this.speaker.stop();
         }
-    };
-    CPU.prototype.executeInstruction = function (opcode) {
+    }
+    executeInstruction(opcode) {
         this.pc += 2;
-        var x = (opcode & 0x0F00) >> 8;
-        var y = (opcode & 0x00F0) >> 4;
+        let x = (opcode & 0x0F00) >> 8;
+        let y = (opcode & 0x00F0) >> 4;
         console.log("x: ", x, "y: ", y);
         switch (opcode & 0xF000) {
             case 0x0000:
@@ -107,7 +107,7 @@ var CPU = /** @class */ (function () {
                         this.renderer.clear();
                         break;
                     case 0x00EE:
-                        var pc = this.stack.pop();
+                        let pc = this.stack.pop();
                         if (pc) {
                             this.pc = pc;
                         }
@@ -160,7 +160,7 @@ var CPU = /** @class */ (function () {
                         this.v[x] ^= this.v[y];
                         break;
                     case 0x4:
-                        var sum = (this.v[x] += this.v[y]);
+                        let sum = (this.v[x] += this.v[y]);
                         this.v[0xF] = 0;
                         if (sum > 0xFF) {
                             this.v[0xF] = 1;
@@ -203,7 +203,7 @@ var CPU = /** @class */ (function () {
                 this.pc = (opcode & 0xFFF) + this.v[0];
                 break;
             case 0xC000:
-                var rand = Math.floor(Math.random() * 0xFFFF);
+                let rand = Math.floor(Math.random() * 0xFFFF);
                 this.v[x] = rand & (opcode & 0xFF);
                 break;
             case 0xD000:
@@ -248,17 +248,17 @@ var CPU = /** @class */ (function () {
                         this.i = this.v[x] * 5;
                         break;
                     case 0x33:
-                        this.memory[this.i] = parseInt(this.v[x] / 100);
-                        this.memory[this.i + 1] = parseInt(this.v[x] % 100) / 10;
-                        this.memory[this.i + 2] = parseInt(this.v[x] % 10);
+                        this.memory[this.i] = Math.floor(this.v[x] / 100);
+                        this.memory[this.i + 1] = Math.floor(this.v[x] % 100) / 10;
+                        this.memory[this.i + 2] = Math.floor(this.v[x] % 10);
                         break;
                     case 0x55:
-                        for (var registerIndex = 0; registerIndex <= x; registerIndex++) {
+                        for (let registerIndex = 0; registerIndex <= x; registerIndex++) {
                             this.memory[this.i + registerIndex] = this.v[registerIndex];
                         }
                         break;
                     case 0x65:
-                        for (var registerIndex = 0; registerIndex <= x; registerIndex++) {
+                        for (let registerIndex = 0; registerIndex <= x; registerIndex++) {
                             this.v[registerIndex] = this.memory[this.i + registerIndex];
                         }
                         break;
@@ -267,15 +267,15 @@ var CPU = /** @class */ (function () {
             default:
                 throw new Error('Unknown opcode ' + opcode);
         }
-    };
-    CPU.prototype.draw = function (x, y, N) {
-        var width = 8;
+    }
+    draw(x, y, N) {
+        let width = 8;
         this.v[0xF] = 0;
         console.log('draw(Vx, Vy): ', this.v[x], this.v[y]);
-        for (var row = 0; row < N; row++) {
-            var sprite = this.memory[this.i + row];
+        for (let row = 0; row < N; row++) {
+            let sprite = this.memory[this.i + row];
             console.log('draw (', row, '): ', sprite.toString(2).padStart(8, '0').replaceAll('1', '■').replaceAll('0', '□'));
-            for (var col = 0; col < width; col++) {
+            for (let col = 0; col < width; col++) {
                 if ((sprite & 0x80) > 0) {
                     if (this.renderer.setPixel(this.v[x] + col, this.v[y] + row)) {
                         this.v[0xF] = 1;
@@ -284,7 +284,7 @@ var CPU = /** @class */ (function () {
                 sprite <<= 1;
             }
         }
-    };
-    return CPU;
-}());
+    }
+}
 exports.default = CPU;
+//# sourceMappingURL=cpu.js.map
