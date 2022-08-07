@@ -1,0 +1,7 @@
+Drop a bomb to the ground without hitting other planes.
+Your airplane is flying at the highest.
+
+On the left bottom, number of dots represents your remaining life. Number
+The number displayed on the bottom represents a number of sucessful drops.
+
+To play  8: drop a bomb

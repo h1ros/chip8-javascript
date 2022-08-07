@@ -1,0 +1,4 @@
+Drawing the Sierpinski triangle.
+
+It consists of an equilateral triangle, with smaller equilateral
+triangles recursively fremoved from its remaining area.

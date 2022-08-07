@@ -1,0 +1,6 @@
+Move a character
+
+    2: move up
+    q: move left
+    e: move right
+    s: move down
