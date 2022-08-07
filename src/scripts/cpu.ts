@@ -71,7 +71,7 @@ class CPU {
         // stack
         this.stack = new Array();
 
-        this.paused = false;
+        this.paused = true;
 
         this.renderer.clear()
     }
@@ -106,6 +106,7 @@ class CPU {
         for (let loc=0; loc < program.length; loc++){
             this.memory[0x200 + loc] = program[loc]
         }
+        this.paused = false
     }
 
     loadRom(romName: string){
@@ -127,6 +128,7 @@ class CPU {
     }
 
     cycle(){
+        console.log(`cycle: ${this.memory}`)
         for (let i = 0; i < this.speed; i++){
             if (!this.paused){
                 console.log("opcode ", this.memory[this.pc].toString(16), this.memory[this.pc+1].toString(16))

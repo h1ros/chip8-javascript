@@ -22,7 +22,7 @@ class CHIP8 {
         const cpu = new CPU(renderer, keyboard, speaker);
         this.cpu = cpu;
     }
-    init() {
+    reset() {
         this.then = Date.now();
         this.startTime = this.then;
         this.cpu.reset();
@@ -34,7 +34,7 @@ class CHIP8 {
         this.cpu.loadRom(rom_game);
         this.rom_game = rom_game;
         this.loop = requestAnimationFrame(this.step);
-        console.log(`this.loop: ${this.loop}`);
+        console.log('CHIP8 is initialized');
     }
 }
 export { CHIP8 };
