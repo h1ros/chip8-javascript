@@ -1,5 +1,3 @@
-"use strict";
-Object.defineProperty(exports, "__esModule", { value: true });
 class Keyboard {
     constructor() {
         console.log('Keyboard is constructed');
@@ -46,5 +44,5 @@ class Keyboard {
         this.keysPressed[key] = false;
     }
 }
-exports.default = Keyboard;
+export default Keyboard;
 //# sourceMappingURL=keyboard.js.map

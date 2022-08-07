@@ -1,5 +1,3 @@
-"use strict";
-Object.defineProperty(exports, "__esModule", { value: true });
 class Speaker {
     constructor() {
         const AudioContext = window.AudioContext || window.webkitAudioContext;
@@ -29,5 +27,5 @@ class Speaker {
         }
     }
 }
-exports.default = Speaker;
+export default Speaker;
 //# sourceMappingURL=speaker.js.map

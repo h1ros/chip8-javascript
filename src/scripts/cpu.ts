@@ -96,7 +96,7 @@ class CPU {
         request.responseType = 'arraybuffer';
 
         request.send();
-
+        console.log(`loaded ROM: ${romName}`);
     }
 
     cycle(){

@@ -1,10 +1,7 @@
-"use strict";
-Object.defineProperty(exports, "__esModule", { value: true });
-exports.CHIP8 = void 0;
-const renderer_js_1 = require("./renderer.js");
-const keyboard_js_1 = require("./keyboard.js");
-const speaker_js_1 = require("./speaker.js");
-const cpu_js_1 = require("./cpu.js");
+import Renderer from './renderer.js';
+import Keyboard from './keyboard.js';
+import Speaker from './speaker.js';
+import CPU from './cpu.js';
 class CHIP8 {
     constructor() {
         this.step = () => {
@@ -19,20 +16,22 @@ class CHIP8 {
         console.log('CHIP8 is constructed');
         let fps = 60;
         this.fpsInterval = 1000 / fps;
-        const renderer = new renderer_js_1.default(10);
-        const keyboard = new keyboard_js_1.default();
-        const speaker = new speaker_js_1.default();
-        const cpu = new cpu_js_1.default(renderer, keyboard, speaker);
+        const renderer = new Renderer(10);
+        const keyboard = new Keyboard();
+        const speaker = new Speaker();
+        const cpu = new CPU(renderer, keyboard, speaker);
         this.cpu = cpu;
     }
     init(rom_game) {
+        console.log(`loading ROM: ${rom_game}`);
         this.then = Date.now();
         this.startTime = this.then;
         this.cpu.loadSpritesIntoMemory();
         this.cpu.loadRom(rom_game);
         this.rom_game = rom_game;
-        this.loop = requestAnimationFrame(() => this.step);
+        this.loop = requestAnimationFrame(this.step);
+        console.log(`this.loop: ${this.loop}`);
     }
 }
-exports.CHIP8 = CHIP8;
+export { CHIP8 };
 //# sourceMappingURL=chip8.js.map

@@ -1,14 +1,12 @@
-"use strict";
-Object.defineProperty(exports, "__esModule", { value: true });
-const chip8_js_1 = require("./scripts/chip8.js");
-window.chip8 = new chip8_js_1.CHIP8();
+import { CHIP8 } from './scripts/chip8.js';
+window.chip8 = new CHIP8();
 function selectRom() {
     let select = document.querySelector('#select-rom option:checked');
     if (select) {
         let optGroup = select.parentElement;
         let romType = optGroup === null || optGroup === void 0 ? void 0 : optGroup.label;
         switchInstuction(`./${romType}/${select.value}.txt`);
-        window.chip8.init(`./${romType}/${select === null || select === void 0 ? void 0 : select.value}.ch8`);
+        window.chip8.init(`./${romType}/${select.value}.ch8`);
     }
     let choices = document.querySelector("input[type=checkbox]");
     if (choices) {

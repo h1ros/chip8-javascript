@@ -8,7 +8,7 @@ function selectRom() {
       let optGroup = select.parentElement as HTMLOptGroupElement | null;
       let romType =  optGroup?.label;
       switchInstuction(`./${romType}/${select.value}.txt`)
-      window.chip8.init(`./${romType}/${select?.value}.ch8`);
+      window.chip8.init(`./${romType}/${select.value}.ch8`);
     }
 
     let choices = document.querySelector("input[type=checkbox]") as HTMLInputElement | null;

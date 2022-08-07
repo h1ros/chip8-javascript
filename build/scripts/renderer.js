@@ -1,5 +1,3 @@
-"use strict";
-Object.defineProperty(exports, "__esModule", { value: true });
 class Renderer {
     constructor(scale) {
         console.log('Renderer is constructed');
@@ -52,5 +50,5 @@ class Renderer {
         this.setPixel(5, 2);
     }
 }
-exports.default = Renderer;
+export default Renderer;
 //# sourceMappingURL=renderer.js.map

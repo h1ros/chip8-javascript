@@ -1,5 +1,3 @@
-"use strict";
-Object.defineProperty(exports, "__esModule", { value: true });
 class CPU {
     constructor(renderer, keyboard, speaker) {
         console.log('CPU is constructed');
@@ -64,6 +62,7 @@ class CPU {
         request.open('GET', 'roms/' + romName);
         request.responseType = 'arraybuffer';
         request.send();
+        console.log(`loaded ROM: ${romName}`);
     }
     cycle() {
         for (let i = 0; i < this.speed; i++) {
@@ -286,5 +285,5 @@ class CPU {
         }
     }
 }
-exports.default = CPU;
+export default CPU;
 //# sourceMappingURL=cpu.js.map
