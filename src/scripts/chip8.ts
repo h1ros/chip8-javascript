@@ -36,7 +36,7 @@ class CHIP8 {
         this.cpu.loadRom(rom_game);
         this.rom_game = rom_game
         this.loop = requestAnimationFrame(this.step);
-        console.log(`this.loop: ${this.loop}`);
+        console.log('CHIP8 is initialized')
     }
 
     step = () => {
