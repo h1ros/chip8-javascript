@@ -8,7 +8,8 @@ declare class CHIP8 {
     loop: number;
     elapsed: number;
     constructor();
-    init(rom_game: string): void;
+    init(): void;
+    loadRom(rom_game: string): void;
     step: () => void;
 }
 export { CHIP8 };

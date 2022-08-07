@@ -23,11 +23,16 @@ class CHIP8 {
         this.cpu = cpu;
     }
 
-    init(rom_game: string) {
+    init() {
+        this.then = Date.now();
+        this.startTime = this.then;
+        this.cpu.reset();
+    }
+
+    loadRom(rom_game: string) {
         console.log(`loading ROM: ${rom_game}`);
         this.then = Date.now();
         this.startTime = this.then;
-        this.cpu.loadSpritesIntoMemory();
         this.cpu.loadRom(rom_game);
         this.rom_game = rom_game
         this.loop = requestAnimationFrame(this.step);

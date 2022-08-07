@@ -15,6 +15,7 @@ declare class CPU {
     keyboard: Keyboard;
     speaker: Speaker;
     constructor(renderer: Renderer, keyboard: Keyboard, speaker: Speaker);
+    reset(): void;
     loadSpritesIntoMemory(): void;
     loadProgramIntoMemory(program: Uint8Array): void;
     loadRom(romName: string): void;

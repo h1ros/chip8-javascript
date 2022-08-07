@@ -1,12 +1,14 @@
 import { CHIP8 } from './scripts/chip8.js';
 window.chip8 = new CHIP8();
+window.chip8.init();
 function selectRom() {
     let select = document.querySelector('#select-rom option:checked');
     if (select) {
         let optGroup = select.parentElement;
         let romType = optGroup === null || optGroup === void 0 ? void 0 : optGroup.label;
         switchInstuction(`./${romType}/${select.value}.txt`);
-        window.chip8.init(`./${romType}/${select.value}.ch8`);
+        window.chip8.init();
+        window.chip8.loadRom(`./${romType}/${select.value}.ch8`);
     }
     let choices = document.querySelector("input[type=checkbox]");
     if (choices) {

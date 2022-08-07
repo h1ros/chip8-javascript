@@ -46,6 +46,34 @@ class CPU {
 
         this.renderer.clear()
 
+        this.loadSpritesIntoMemory()
+
+    }
+
+    reset(){
+        // Memory
+        this.memory = new Uint8Array(4096);
+        this.loadSpritesIntoMemory()
+
+        // 16 8-bit registers
+        this.v = new Uint8Array(16);
+
+        // memory address
+        this.i = 0
+
+        // Timers
+        this.delayTimer = 0;
+        this.soundTimer = 0;
+
+        // Program counter CPU
+        this.pc = 0x200
+
+        // stack
+        this.stack = new Array();
+
+        this.paused = false;
+
+        this.renderer.clear()
     }
 
     loadSpritesIntoMemory(){
@@ -72,7 +100,6 @@ class CPU {
         for (let i = 0; i < sprites.length; i++) {
             this.memory[i] = sprites[i]
         }
-
     }
 
     loadProgramIntoMemory(program: Uint8Array){
