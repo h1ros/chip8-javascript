@@ -52,7 +52,6 @@ class Renderer {
 
                 if (this.display[i]) {
                     this.ctx.fillStyle = '#000';
-
                     this.ctx.fillRect(x, y, this.scale, this.scale)
                 }
             }

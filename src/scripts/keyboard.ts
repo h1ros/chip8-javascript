@@ -36,9 +36,8 @@ class Keyboard{
     }
     onKeyDown(event: KeyboardEvent){
         let key: number = this.KEYMAP[event.which];
-        console.log('down key: ', key)
         this.keysPressed[key] = true;
-        if (this.onNextKeyPress !== null && key) {
+        if (this.onNextKeyPress !== null && (key !== null)) {
             this.onNextKeyPress(key);
             this.onNextKeyPress = null;
         }

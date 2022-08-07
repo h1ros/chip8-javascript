@@ -85,7 +85,6 @@ class CPU {
         console.log(`loaded ROM: ${romName}`);
     }
     cycle() {
-        console.log(`cycle: ${this.memory}`);
         for (let i = 0; i < this.speed; i++) {
             if (!this.paused) {
                 console.log("opcode ", this.memory[this.pc].toString(16), this.memory[this.pc + 1].toString(16));
@@ -249,8 +248,10 @@ class CPU {
                         this.v[x] = this.delayTimer;
                         break;
                     case 0x0A:
+                        console.log(`Waiting for key press`);
                         this.paused = true;
                         this.keyboard.onNextKeyPress = function (key) {
+                            console.log(`onNextKeyPress: v[x]: ${this.v[x]} x: ${x}, key: ${key}`);
                             this.v[x] = key;
                             this.paused = false;
                         }.bind(this);
