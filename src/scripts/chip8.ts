@@ -23,7 +23,7 @@ class CHIP8 {
         this.cpu = cpu;
     }
 
-    init() {
+    reset() {
         this.then = Date.now();
         this.startTime = this.then;
         this.cpu.reset();

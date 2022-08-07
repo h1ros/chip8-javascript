@@ -1,7 +1,6 @@
 import {CHIP8} from './scripts/chip8.js';
 
 window.chip8 = new CHIP8();
-window.chip8.init();
 
 
 function selectRom() {
@@ -10,7 +9,7 @@ function selectRom() {
       let optGroup = select.parentElement as HTMLOptGroupElement | null;
       let romType =  optGroup?.label;
       switchInstuction(`./${romType}/${select.value}.txt`)
-      window.chip8.init();
+      window.chip8.reset();
       window.chip8.loadRom(`./${romType}/${select.value}.ch8`);
     }
 
