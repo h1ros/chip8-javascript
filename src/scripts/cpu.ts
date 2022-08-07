@@ -1,5 +1,22 @@
+import Renderer from './renderer.js';
+import Keyboard from './keyboard.js';
+import Speaker from './speaker.js';
+
 class CPU {
-    constructor(renderer, keyboard, speaker){
+    memory: Uint8Array;
+    delayTimer: number;
+    soundTimer: number;
+    i: number;
+    pc: number;
+    stack: Array<number>;
+    v: Uint8Array;
+    paused: boolean;
+    speed: number;
+    renderer: Renderer;
+    keyboard: Keyboard;
+    speaker: Speaker;
+
+    constructor(renderer: Renderer, keyboard: Keyboard, speaker: Speaker){
         console.log('CPU is constructed')
         this.renderer = renderer;
         this.keyboard = keyboard;
@@ -29,6 +46,34 @@ class CPU {
 
         this.renderer.clear()
 
+        this.loadSpritesIntoMemory()
+
+    }
+
+    reset(){
+        // Memory
+        this.memory = new Uint8Array(4096);
+        this.loadSpritesIntoMemory()
+
+        // 16 8-bit registers
+        this.v = new Uint8Array(16);
+
+        // memory address
+        this.i = 0
+
+        // Timers
+        this.delayTimer = 0;
+        this.soundTimer = 0;
+
+        // Program counter CPU
+        this.pc = 0x200
+
+        // stack
+        this.stack = new Array();
+
+        this.paused = false;
+
+        this.renderer.clear()
     }
 
     loadSpritesIntoMemory(){
@@ -55,16 +100,15 @@ class CPU {
         for (let i = 0; i < sprites.length; i++) {
             this.memory[i] = sprites[i]
         }
-
     }
 
-    loadProgramIntoMemory(program){
+    loadProgramIntoMemory(program: Uint8Array){
         for (let loc=0; loc < program.length; loc++){
             this.memory[0x200 + loc] = program[loc]
         }
     }
 
-    loadRom(romName){
+    loadRom(romName: string){
         var request = new XMLHttpRequest();
         var self = this; request;
 
@@ -79,7 +123,7 @@ class CPU {
         request.responseType = 'arraybuffer';
 
         request.send();
-
+        console.log(`loaded ROM: ${romName}`);
     }
 
     cycle(){
@@ -114,7 +158,7 @@ class CPU {
         }
     }
 
-    executeInstruction(opcode){
+    executeInstruction(opcode: number){
         this.pc += 2;
         let x = (opcode & 0x0F00) >> 8;
         let y = (opcode & 0x00F0) >> 4;
@@ -126,7 +170,12 @@ class CPU {
                         this.renderer.clear();
                         break;
                     case 0x00EE:
-                        this.pc = this.stack.pop();
+                        let pc = this.stack.pop()
+                        if (pc){
+                            this.pc = pc;
+                        } else {
+                            console.error('pc is undefined')
+                        }
                         break;
                 }
                 break;
@@ -248,7 +297,7 @@ class CPU {
                     case 0x0A:
                         this.paused = true;
 
-                        this.keyboard.onNextKeyPress = function(key){
+                        this.keyboard.onNextKeyPress = function(this: CPU, key: number){
                             this.v[x] = key;
                             this.paused = false;
                         }.bind(this);
@@ -266,9 +315,9 @@ class CPU {
                         this.i = this.v[x] * 5;
                         break;
                     case 0x33:
-                        this.memory[this.i] = parseInt(this.v[x] / 100);
-                        this.memory[this.i + 1] = parseInt(this.v[x] % 100) / 10;
-                        this.memory[this.i + 2] = parseInt(this.v[x] % 10);
+                        this.memory[this.i] = Math.floor(this.v[x] / 100);
+                        this.memory[this.i + 1] =  Math.floor(this.v[x] % 100) / 10;
+                        this.memory[this.i + 2] =  Math.floor(this.v[x] % 10);
                         break;
                     case 0x55:
                         for (let registerIndex = 0; registerIndex <= x; registerIndex++){
@@ -291,7 +340,7 @@ class CPU {
 
     }
 
-    draw(x, y, N){
+    draw(x: number, y: number, N: number){
         let width = 8;
 
         this.v[0xF] = 0;

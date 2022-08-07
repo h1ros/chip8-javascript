@@ -4,22 +4,35 @@ import Speaker from './speaker.js';
 import CPU from './cpu.js';
 
 class CHIP8 {
+    fpsInterval: number;
+    cpu: CPU
+    then!: number;
+    startTime!: number;
+    rom_game!: string;
+    loop!: number;
+    elapsed!: number;
+
     constructor(){
         console.log('CHIP8 is constructed')
+        let fps = 60
+        this.fpsInterval = 1000 / fps;
+        const renderer = new Renderer(10);
+        const keyboard = new Keyboard();
+        const speaker = new Speaker();
+        const cpu = new CPU(renderer, keyboard, speaker);
+        this.cpu = cpu;
     }
 
-    init(rom_game) {
-        let renderer = new Renderer(10);
-        let keyboard = new Keyboard();
-        let speaker = new Speaker();
-        let cpu = new CPU(renderer, keyboard, speaker);
-        let fps = 60
-        this.cpu = cpu;
-        this.fpsInterval = 1000 / fps;
-
+    init() {
         this.then = Date.now();
         this.startTime = this.then;
-        this.cpu.loadSpritesIntoMemory();
+        this.cpu.reset();
+    }
+
+    loadRom(rom_game: string) {
+        console.log(`loading ROM: ${rom_game}`);
+        this.then = Date.now();
+        this.startTime = this.then;
         this.cpu.loadRom(rom_game);
         this.rom_game = rom_game
         this.loop = requestAnimationFrame(this.step);
@@ -34,7 +47,6 @@ class CHIP8 {
                 this.then = Date.now();
         }
         this.loop = requestAnimationFrame(this.step);
-
     }
 }
 

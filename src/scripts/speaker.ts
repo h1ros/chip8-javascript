@@ -1,4 +1,14 @@
+declare global {
+    interface Window {
+        webkitAudioContext: any;
+    }
+  }
 class Speaker{
+    audioCtx: AudioContext;
+    gain: GainNode;
+    finish: AudioDestinationNode
+    oscillator: any;
+
 
     constructor(){
         const AudioContext = window.AudioContext || window.webkitAudioContext
@@ -15,7 +25,7 @@ class Speaker{
         // this.gain.setValueAtTime(1, this.audioCtx.currentTime);
     }
 
-    play(frequency){
+    play(frequency: number){
         if (this.audioCtx && !this.oscillator){
             this.oscillator = this.audioCtx.createOscillator();
 

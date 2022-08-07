@@ -1,4 +1,8 @@
 class Keyboard{
+    KEYMAP: {[key: number]: number};
+    keysPressed: {[key: string]: boolean};
+    onNextKeyPress: null | Function;
+
     constructor() {
         console.log('Keyboard is constructed')
         this.KEYMAP = {
@@ -20,26 +24,26 @@ class Keyboard{
             86: 0xF  // V
         };
 
-        this.keysPressed = [];
+        this.keysPressed = {};
         this.onNextKeyPress = null; //
         window.addEventListener("keydown", this.onKeyDown.bind(this), false);
         window.addEventListener("keyup", this.onKeyUp.bind(this), false);
 
     }
-    isKeyPressed(keyCode){
+    isKeyPressed(keyCode: number){
         console.log('keyCode: ', keyCode)
         return this.keysPressed[keyCode];
     }
-    onKeyDown(event){
-        let key = this.KEYMAP[event.which];
+    onKeyDown(event: KeyboardEvent){
+        let key: number = this.KEYMAP[event.which];
         console.log('down key: ', key)
         this.keysPressed[key] = true;
         if (this.onNextKeyPress !== null && key) {
-            this.onNextKeyPress(parseInt(key));
+            this.onNextKeyPress(key);
             this.onNextKeyPress = null;
         }
     }
-    onKeyUp(event) {
+    onKeyUp(event: KeyboardEvent) {
         console.log('onKeyUp event', event)
         let key = this.KEYMAP[event.which];
         console.log('up key: ', key)
